@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+
+//A continuación se crean los modelos de mis entidades.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Ejercicio_realizado {
+  id        Int      @id @default(autoincrement())
+  Estado Boolean  @default(true)
+  tipo_de_ejercicio    Tipo_de_ejercicio     @relation(fields: [Idtipoejercicio], references: [id])
+  Idtipoejercicio  Int
+  deportista    Deportista     @relation(fields: [Iddeportista], references: [id])
+  Iddeportista  Int
+  Fecha String
+  Hora String
+  Tiempo_transcurrido String
+  Calorias_quemadas String
+  
+}
+
+model Tipo_de_ejercicio {
+  id     Int     @id @default(autoincrement())
+  tipo_de_ejercicio    String
+  ejerciciorealizado Ejercicio_realizado []
+}
+
+model Deportista {
+  id      Int      @id @default(autoincrement())   
+  nombre    String?
+  peso   String?
+  altura   Int
+  edad Int
+  ejerciciorealizado Ejercicio_realizado []
+}
