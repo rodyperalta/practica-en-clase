@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createDeportista = exports.createTipoDeEjercicio = exports.createEjercicioRealizado = exports.getDeportistas = exports.getTiposDeEjercicio = exports.getEjerciciosRealizados = void 0;
+const client_1 = require("@prisma/client");
+const prisma = new client_1.PrismaClient();
+const getEjerciciosRealizados = () => prisma.ejercicio_realizado.findMany();
+exports.getEjerciciosRealizados = getEjerciciosRealizados;
+const getTiposDeEjercicio = () => prisma.tipo_de_ejercicio.findMany();
+exports.getTiposDeEjercicio = getTiposDeEjercicio;
+const getDeportistas = () => prisma.deportista.findMany();
+exports.getDeportistas = getDeportistas;
+const createEjercicioRealizado = (data) => prisma.ejercicio_realizado.create({ data });
+exports.createEjercicioRealizado = createEjercicioRealizado;
+const createTipoDeEjercicio = (data) => prisma.tipo_de_ejercicio.create({ data });
+exports.createTipoDeEjercicio = createTipoDeEjercicio;
+const createDeportista = (data) => prisma.deportista.create({ data });
+exports.createDeportista = createDeportista;
